@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Love Letter</title>
+    <link href="../public/output.css" rel="stylesheet" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+      body {
+        background-color: #fde2e2;
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="%23fc8181" d="M50 30c0 11-18 18-18 40 0-22 18-29 18-40z"/><path fill="%23fc8181" d="M50 30c0 11 18 18 18 40 0-22-18-29-18-40z"/><circle fill="%23fc8181" cx="41" cy="35" r="9"/><circle fill="%23fc8181" cx="59" cy="35" r="9"/></svg>');
+        background-repeat: repeat;
+      }
+      .input-style {
+        border: 1px solid #d1d5db;
+        border-radius: 0.375rem;
+        padding: 0.5rem;
+        width: 100%;
+        margin-top: 0.25rem;
+        box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+      }
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column;
+        max-width: 100%;
+      }
+      .continent-boxes {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-top: 32px;
+      }
+
+      /* Adding background color to the popup */
+      .success-popup-bg {
+        background-color: #fef3c7; /* A light yellow background, change as needed */
+        border: 1px solid #fde68a; /* Slightly darker border for some depth */
+      }
+      .form-card {
+        background: #ffffff;
+        border-radius: 0.5rem;
+        padding: 2rem;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+      .input-style {
+        border: 1px solid #d1d5db; /* gray-300 */
+        border-radius: 0.375rem; /* rounded-md */
+        padding: 0.5rem; /* p-2 */
+        width: 100%;
+        margin-top: 0.25rem; /* mt-1 */
+        box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+      }
+      .btn {
+        background-color: #cde4b4; /* blue-500 */
+        color: #000000;
+        padding: 0.5rem 10rem;
+        border-radius: 0.375rem;
+        transition: background-color 0.2s;
+        box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+      }
+      .btn:hover {
+        background-color: #ffeea9; /* blue-600 */
+      }
+      .box {
+        width: 150px;
+        height: 150px;
+        position: relative;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        position: relative;
+        overflow: hidden;
+      }
+      .fill {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 0%;
+        background-color: pink;
+        transition: height 0.3s ease;
+      }
+
+      .box span {
+        position: relative; /* Ensure the text appears above the overlay */
+        z-index: 1;
+      }
+      .cupid-gif {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* z-index: -1;  */
+      }
+      .text-outline {
+    color: #FEE2E1; /* Light pink color */
+    text-shadow: 
+      -1px -1px 0 #000,  
+       1px -1px 0 #000,
+      -1px  1px 0 #000,
+       1px  1px 0 #000; /* Black text shadow for outline effect */
+  }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Success Popup Overlay -->
+      <div
+        id="successPopup"
+        class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex justify-center items-center"
+      >
+        <!-- Success Popup -->
+        <div class="relative bg-white rounded-lg shadow-xl p-6 w-full max-w-md">
+          <!-- Close button -->
+          <div class="absolute top-0 right-0 pt-4 pr-4">
+            <button
+              id="closePopupBtn"
+              class="text-gray-400 hover:text-gray-500 focus:outline-none"
+            >
+              <span class="text-2xl">&times;</span>
+            </button>
+          </div>
+          <div class="text-center">
+            <h3 class="text-lg leading-6 font-medium text-gray-900">
+              Success!
+            </h3>
+            <div class="mt-2">
+              <p class="text-sm text-gray-500">
+                Your email has been sent successfully.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <form action="/submit" method="post" id="emailForm" class="space-y-4">
+          <div>
+            <label for="email" class="block text-lg font-semibold"
+              >Recipient Email:</label
+            >
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="input-style"
+              required
+            />
+          </div>
+          <div>
+            <label for="message" class="block text-lg font-semibold"
+              >Your Message:</label
+            >
+            <textarea
+              id="message"
+              name="message"
+              class="input-style"
+              required
+            ></textarea>
+          </div>
+          <div>
+            <label for="continent" class="block text-lg font-semibold"
+              >Continent:</label
+            >
+            <select
+              id="continent"
+              name="continent"
+              class="input-style"
+              required
+            >
+              <option value="Africa">Africa</option>
+              <option value="Asia">Asia</option>
+              <option value="Europe">Europe</option>
+              <option value="North America">North America</option>
+              <option value="South America">South America</option>
+              <option value="Australia">Australia</option>
+              <option value="Antarctica">Antarctica</option>
+            </select>
+          </div>
+          <button type="submit" class="btn w-full">
+            Send Anonymous Letter
+          </button>
+        </form>
+      </div>
+      <div class="continent-boxes">
+        <div class="bg-white bg-opacity-50 text-center py-4 mb-8 w-full rounded-lg shadow">
+          <span class="font-semibold text-xl text-outline">WorldWide Letter Box</span>
+          <i class="fas fa-envelope ml-2 text-outline"></i>
+        </div>
+        
+        <div class="flex flex-col items-center">
+          <div class="box" data-continent="Africa">
+            <div class="fill"></div>
+            <img src="/assets/admire-adore.gif" alt="Cupid" class="cupid-gif" />
+          </div>
+          <span class="mt-2 text-center">Africa</span>
+        </div>
+
+        <div class="flex flex-col items-center">
+          <div class="box" data-continent="Europe">
+            <div class="fill"></div>
+            <img
+              src="/assets/cupid-arrow-admire.gif"
+              alt="Cupid"
+              class="cupid-gif"
+            />
+          </div>
+          <span class="mt-2 text-center">Europe</span>
+        </div>
+
+        <div class="flex flex-col items-center">
+          <div class="box" data-continent="Asia">
+            <div class="fill"></div>
+            <img
+              src="/assets/cordial-love-growing-love.gif"
+              alt="Cupid"
+              class="cupid-gif"
+            />
+          </div>
+          <span class="mt-2 text-center">Asia</span>
+        </div>
+
+        <div class="flex flex-col items-center">
+          <div class="box" data-continent="North America">
+            <div class="fill"></div>
+            <img
+              src="/assets/cupid-arrow-hearts.gif"
+              alt="Cupid"
+              class="cupid-gif"
+            />
+          </div>
+          <span class="mt-2 text-center">North America</span>
+        </div>
+
+        <div class="flex flex-col items-center">
+          <div class="box" data-continent="South America">
+            <div class="fill"></div>
+            <img src="/assets/saltobears.gif" alt="Cupid" class="cupid-gif" />
+          </div>
+          <span class="mt-2 text-center">South America</span>
+        </div>
+
+        <div class="flex flex-col items-center">
+          <div class="box" data-continent="Australia">
+            <div class="fill"></div>
+            <img
+              src="/assets/love-you-lovestruck.gif"
+              alt="Cupid"
+              class="cupid-gif"
+            />
+          </div>
+          <span class="mt-2 text-center">Australia</span>
+        </div>
+
+        <div class="flex flex-col items-center">
+          <div class="box" data-continent="Antarctica">
+            <div class="fill"></div>
+            <img src="/assets/nanip50.gif" alt="Cupid" class="cupid-gif" />
+          </div>
+          <span class="mt-2 text-center">Antarctica</span>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        fetch("/continent-counts")
+          .then((response) => response.json())
+          .then((data) => {
+            data.forEach((item) => {
+              const box = document.querySelector(
+                `.box[data-continent="${item.continent}"]`
+              );
+              if (box) {
+                const maxCount = 100;
+                let fullness = Math.min(item.count / maxCount, 1) * 100;
+                const fill = box.querySelector(".fill");
+                if (fill) {
+                  fill.style.height = `${fullness}%`;
+                }
+              }
+            });
+          })
+          .catch((error) =>
+            console.error("Error fetching continent counts:", error)
+          );
+      });
+
+      document
+        .getElementById("emailForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault(); // Prevent default form submission
+
+          const formData = new FormData(this);
+          const email = formData.get("email");
+          const message = formData.get("message");
+          const continent = formData.get("continent");
+
+          axios
+            .post("/send-email", {
+              email: email,
+              message: message,
+            })
+            .then(function (response) {
+              if (response.data.success) {
+                document.getElementById("emailForm").reset();
+                showPopup();
+                axios.post("/update-count", { continent }).then((response) => {
+                  if (response.status !== 200) {
+                    throw new Error("Failed to update country letter box");
+                  }
+                });
+              } else {
+                throw new Error("Failed to send email");
+              }
+            })
+            .catch(function (error) {
+              console.error("Error:", error);
+              alert(error.message || "Failed to send email");
+            });
+        });
+
+      function showPopup() {
+        document.getElementById("successPopup").classList.remove("hidden");
+        setTimeout(() => {
+          closePopup();  
+        }, 5000);
+   
+      }
+
+      function closePopup() {
+        document.getElementById("successPopup").classList.add("hidden");
+      }
+
+      // Close popup when the "Okay" button is clicked
+      document
+        .getElementById("closePopupBtn")
+        .addEventListener("click", function () {
+          closePopup();
+        });
+    </script>
+  </body>
+</html>

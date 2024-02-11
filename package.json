@@ -1,0 +1,22 @@
+{
+    "name": "love-letter-app",
+    "version": "1.0.0",
+    "description": "An application to send love letters and fill up continent boxes by 0.1% for each letter sent.",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js",
+        "dev": "nodemon server.js"
+    },
+    "dependencies": {
+        "cors": "^2.8.5",
+        "dotenv": "^16.4.2",
+        "express": "^4.17.1",
+        "nodemailer": "^6.9.9",
+        "nodemailer-express-handlebars": "^6.1.0",
+        "sqlite3": "^5.0.2",
+        "tailwindcss": "^2.2.19"
+    },
+    "engines": {
+        "node": "14.x"
+    }
+}

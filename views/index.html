@@ -9,7 +9,10 @@
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
     <style>
       body {
         background-color: #fde2e2;
@@ -107,13 +110,10 @@
         object-fit: cover;
       }
       .text-outline {
-    color: #FEE2E1; /* Light pink color */
-    text-shadow: 
-      -1px -1px 0 #000,  
-       1px -1px 0 #000,
-      -1px  1px 0 #000,
-       1px  1px 0 #000; /* Black text shadow for outline effect */
-  }
+        color: #fee2e1; /* Light pink color */
+        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+          1px 1px 0 #000; /* Black text shadow for outline effect */
+      }
     </style>
   </head>
   <body>
@@ -195,15 +195,25 @@
             Send Anonymous Letter
           </button>
         </form>
+        <p class="mt-4 text-xs text-yellow-500 text-center">
+          Disclaimer: No emails are saved in the creation of this application. All communications are made in real-time and are not stored by the application. So express away!!
+      </p>
       </div>
       <div class="continent-boxes">
-        <div class="bg-white bg-opacity-50 text-center py-2 mb-8 w-full rounded-lg shadow sm:py-4">
-          <span class="font-semibold text-xl text-outline">WorldWide Letter Box</span>
+        <div
+          class="bg-white bg-opacity-50 text-center py-2 mb-8 w-full rounded-lg shadow sm:py-4"
+        >
+          <span class="font-semibold text-xl text-outline"
+            >WorldWide Letter Box</span
+          >
           <i class="fas fa-envelope ml-2 text-outline"></i>
         </div>
-        
+
         <div class="flex flex-col items-center">
-          <div class="box w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48" data-continent="Africa">
+          <div
+            class="box w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48"
+            data-continent="Africa"
+          >
             <div class="fill"></div>
             <img src="/assets/admire-adore.gif" alt="Cupid" class="cupid-gif" />
           </div>
@@ -211,7 +221,10 @@
         </div>
 
         <div class="flex flex-col items-center">
-          <div class="box w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48" data-continent="Europe">
+          <div
+            class="box w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48"
+            data-continent="Europe"
+          >
             <div class="fill"></div>
             <img
               src="/assets/cupid-arrow-admire.gif"
@@ -223,7 +236,10 @@
         </div>
 
         <div class="flex flex-col items-center">
-          <div class="box w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48" data-continent="Asia">
+          <div
+            class="box w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48"
+            data-continent="Asia"
+          >
             <div class="fill"></div>
             <img
               src="/assets/cordial-love-growing-love.gif"
@@ -235,7 +251,10 @@
         </div>
 
         <div class="flex flex-col items-center">
-          <div class="box w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48" data-continent="North America">
+          <div
+            class="box w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48"
+            data-continent="North America"
+          >
             <div class="fill"></div>
             <img
               src="/assets/cupid-arrow-hearts.gif"
@@ -247,7 +266,10 @@
         </div>
 
         <div class="flex flex-col items-center">
-          <div class="box w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48" data-continent="South America">
+          <div
+            class="box w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48"
+            data-continent="South America"
+          >
             <div class="fill"></div>
             <img src="/assets/saltobears.gif" alt="Cupid" class="cupid-gif" />
           </div>
@@ -255,7 +277,10 @@
         </div>
 
         <div class="flex flex-col items-center">
-          <div class="box w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48" data-continent="Australia">
+          <div
+            class="box w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48"
+            data-continent="Australia"
+          >
             <div class="fill"></div>
             <img
               src="/assets/love-you-lovestruck.gif"
@@ -267,7 +292,10 @@
         </div>
 
         <div class="flex flex-col items-center">
-          <div class="box w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48" data-continent="Antarctica">
+          <div
+            class="box w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48"
+            data-continent="Antarctica"
+          >
             <div class="fill"></div>
             <img src="/assets/nanip50.gif" alt="Cupid" class="cupid-gif" />
           </div>
@@ -337,9 +365,8 @@
       function showPopup() {
         document.getElementById("successPopup").classList.remove("hidden");
         setTimeout(() => {
-          closePopup();  
+          closePopup();
         }, 5000);
-   
       }
 
       function closePopup() {
